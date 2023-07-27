@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            margin-left: 200px;
+            padding-top: 40px;
+
+        }
+
+        h1 {
+            color: #333;
+            margin-left: 300px;
+        }
+
+        .container {
+            padding-top: 50px;
+            display: flex;
+        }
+
+        .form-container {
+          
+            width: 400px;
+            border: 1px solid #ccc;
+            padding: 50px;
+            background-color: #f9f9f9;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-container textarea,
+        .form-container input {
+            width: 60%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .download-container {
+            display: flex;
+            align-items: center;
+         
+            width: 400px;
+            border: 1px solid #ccc;
+            padding: 50px;
+            background-color: #f9f9f9;
+        }
+
+        .download-button {
+            margin-left: 130px;
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .download-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pdf Protect with Password</h1>
+    <div class="container">
+        <div class="form-container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="comments">Description</label>
+                <textarea id="comments" name="comments"></textarea>
+                <label for="password">Enter Password for PDF Protection</label>
+                <input type="password" id="password" name="password" />
+                <label for="myfile">Pdf</label>
+                <input type="file" name="myfile" id="myfile"> <br>
+                <button type="submit">Submit</button>
+            </form>
+
+        </div>
+        <div class="download-container">
+            {% if product.pdffile %}
+            <a href="{{product.pdffile}}" class="download-button" download="{{product.pdffile}}">Download PDF</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
