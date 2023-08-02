@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
+from wsgiref.util import FileWrapper
 import PyPDF2
 import io 
 import magic
@@ -48,5 +49,5 @@ def protect_pdf_with_password(pdffile, password):
 def save_protected_pdf(name, pdf_content):
     protected_file = io.BytesIO(pdf_content)
     response = HttpResponse(FileWrapper(protected_file), content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{name}_protect.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="{name}_protected.pdf"'
     return response
