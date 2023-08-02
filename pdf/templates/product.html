@@ -65,6 +65,9 @@
             padding: 50px;
             background-color: #f9f9f9;
         }
+        .download-container p{
+            color: red;
+        }
 
         .download-button {
             margin-left: 130px;
@@ -84,16 +87,20 @@
             background-color: #45a049;
         }
     </style>
+   
 </head>
 
 <body>
     <h1>Pdf Protect with Password</h1>
+    <script>
+        {% if message %}
+        alert("{{ message }}");
+        {% endif %}
+    </script>
     <div class="container">
         <div class="form-container">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <label for="comments">Description</label>
-                <textarea id="comments" name="comments"></textarea>
                 <label for="password">Enter Password for PDF Protection</label>
                 <input type="password" id="password" name="password" />
                 <label for="myfile">Pdf</label>
@@ -103,8 +110,8 @@
 
         </div>
         <div class="download-container">
-            {% if product.pdffile %}
-            <a href="{{product.pdffile}}" class="download-button" download="{{product.pdffile}}">Download PDF</a>
+            {% if message %}
+            <p>{{message}}</p>
             {% endif %}
         </div>
     </div>
